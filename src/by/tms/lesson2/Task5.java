@@ -1,6 +1,5 @@
-package by.tms;
+package by.tms.lesson2;
 
-import java.lang.reflect.Array;
 import java.util.Scanner;
 
 public class Task5 {
