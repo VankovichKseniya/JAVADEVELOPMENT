@@ -1,4 +1,4 @@
-package by.tms.lesson4;
+package by.tms.lesson4.task1;
 
 public class Polindrome {
 
