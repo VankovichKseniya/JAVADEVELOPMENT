@@ -1,4 +1,4 @@
-package by.tms.lesson9;
+package by.tms.lesson10;
 
 public class Main {
 }
