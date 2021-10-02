@@ -1,40 +1,38 @@
 package by.tms.kotlinProgects
 
-import java.io.File
 import java.io.FileWriter
 import java.nio.file.Files
 import java.nio.file.Path
 
-class task1 {
+class Task1KT {
 
-    val LETTERS_FOR_RUS: Array<Char> = arrayOf('а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о',  //создаю константу массива char
-    'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я')
+    private val lettersForRus: Array<Char> = arrayOf('а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о',  //создаю константу массива char
+            'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я')
 
-    fun getSumChars(fileName: File){
-        var result = Files.readString(Path.of(fileName.toString()))
-        val writer = FileWriter("newFile.txt", true)
-
-        for(char in 'а'..'я'){
-            LETTERS_FOR_RUS[char - 'а'] = char
+    fun getSumChars(fileName: String) {
+        var result = Files.readString(Path.of(fileName.toString()))        //создаю переменную String, которая построчно проходится по указанному файлу
+        val writer = FileWriter("newFile.txt", true)    //создаю файл, в который буду записывать данные.
+        for (char in 'а'..'я') {                                        //первый цикл, который проходится по всем буквам в константе
+            lettersForRus[char - 'а'] = char
         }
-        var count = 0
-        var letter: Char
-
+        var count = 0                                                //задаю переменную int, которая будет сохранять в себе количество букв.
+        var letter: Char                                            //задаю переменную char, которая будет сохранять в себе букву.
         var i = 0
-        var w = 0
-        while (i < LETTERS_FOR_RUS.size){
-            i++
-            while(w < result.length){
-                letter = result.toLowerCase()[w]
-                if(letter.equals(LETTERS_FOR_RUS[i])){
-                    count++
+
+        while (i < lettersForRus.size) {                               //создаю второй цикл, который проходиться по всем буквам константы.
+            var w = 0
+            while (w < result.length) {                                //создаю третий цикл, который проходится по всей длине каждой строчки файла,
+                letter = result.toLowerCase()[w]                      //подгоняю все считываемые с файла символы в нижний регистр.
+                if (letter.equals(lettersForRus[i])) {                   //сравниваю переменную char с массивом константы,
+                    count++                                           //при значении true засчитывается еденица в переменную count
                 }
                 w++
-            }
-            writer.append(LETTERS_FOR_RUS[i] + " - " + count)
+            }                                                          // часть второго цикла,где в новый файл
+            writer.append(lettersForRus[i] + " - " + count)            //записываются данные о количестве каждой буквы с новой строчки.
             writer.append('\n')
-            count = 0
+            count = 0                                                  //обнуляю count, чтобы данные с 3-го цикла не суммировались
+            i++
         }
-           writer.close()
+        writer.close()                                              //закрываю созданный файл после работы
     }
 }
